@@ -34,11 +34,11 @@ npm start
 
 ## Screenshots
 
-![Contact List Screenshot](/screenshots/img1.jpg?raw=true)
+![Contact List Screenshot](/screenshots/1.jpg?raw=true)
 
-![Add Contact Screenshot](/screenshots/img2.jpg?raw=true)
+![Add Contact Screenshot](/screenshots/2.jpg?raw=true)
 
-![Filter Contact Screenshot](/screenshots/img3.jpg?raw=true)
+![Filter Contact Screenshot](/screenshots/3.jpg?raw=true)
 
 
 ## Features
