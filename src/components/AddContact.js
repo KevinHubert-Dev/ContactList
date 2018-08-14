@@ -1,8 +1,10 @@
 import React, { Component } from "react"
 import { Link } from 'react-router-dom'
+
 import ImageInput from './ImageInput'
 import serializeForm from 'form-serialize'
 import PropTypes from "prop-types"
+
 
 class AddContact extends Component {
 
@@ -27,9 +29,6 @@ class AddContact extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const values = serializeForm(e.target, { hash: true })
-    console.log(values);
-    console.log(values);
-    console.log(values);
     this.props.onCreateContact(values);
   }
 

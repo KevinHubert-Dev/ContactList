@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
+
 import ListContacts from "./components/ListContacts"
 import AddContact from "./components/AddContact"
+
 import * as ContactAPI from "./utils/ContactsAPI"
-import { Route } from 'react-router-dom'
+
 
 class App extends Component {
   state = {
@@ -10,16 +13,20 @@ class App extends Component {
     screen: 'list'
   }
 
-
+  /**
+   * Load all Contacts from Server
+   */
   componentDidMount() {
     ContactAPI.getAll().then(users => {
-      console.log("Received users");
       this.setState({ contacts: users })
     })
       .catch(err => console.error(err))
   }
 
-
+  /**
+   * Delete as specfic contact
+   * @param {object} _contactToDelete - Contact Object from Contact-List which should get deleted
+   */
   deleteContact = (_contactToDelete) => {
     ContactAPI.remove(_contactToDelete).then(value => {
       console.log(value);
@@ -30,7 +37,10 @@ class App extends Component {
     }))
   }
 
-
+  /**
+   * Add a new Contact
+   * @param {object} _contactToAdd - Contact Object to add to the ContactList.
+   */
   addContact = (_contactToAdd) => {
     ContactAPI.create(_contactToAdd).then(createdContact => {
       this.setState(currentState => ({
@@ -38,34 +48,35 @@ class App extends Component {
       }))
     })
       .catch(err => console.error(err))
-
   }
 
-
+  /**
+   * Render method of the App-Component
+   */
   render() {
     return (
       <div>
-        <Route exact path='/' render={() => (
-          <ListContacts
-            onDeleteContact={this.deleteContact}
-            contacts={this.state.contacts}
-          />
+        {/* Render all contacts */}
+        <Route exact path='/' render={() =>
+          (
+            <ListContacts
+              onDeleteContact={this.deleteContact}
+              contacts={this.state.contacts}
+            />
+          )}
+        />
 
-        )} />
-
-
-
-        <Route path='/create' render={({ history }) => (
-          < AddContact
-            onCreateContact={(contact) => {
-              this.addContact(contact);
-              history.push('/')
-            }}
-          />
-
-        )} />
-
-
+        {/* Render Component to create a new Contact */}
+        <Route path='/create' render={({ history }) =>
+          (
+            <AddContact
+              onCreateContact={(contact) => {
+                this.addContact(contact);
+                history.push('/')
+              }}
+            />
+          )}
+        />
       </div>
     )
   }
